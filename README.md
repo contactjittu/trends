@@ -2,7 +2,7 @@
 
 ![alt Big-O Complexity Chart](data/BigOComplexityChart.jpg)
 
-Javascript object of Big-O
+### Javascript object of Big-O
 ```javascript
 const person = {
     firstName: 'John',
@@ -20,8 +20,10 @@ Time Complexity is O(n) for all below operations
 - Object.values
 - Object.entries
 
-Array of Big-O
-
+### Array of Big-O
+```javascript
+const odd = [1, 3, 5, 7, 9]
+```
 Time Complexity is O(1) for all below operations
 - Insert/remove at end
 - Access
