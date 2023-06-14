@@ -21,4 +21,24 @@ console.log(fibonacci(5)); // [0,1,1,2,3]
 console.log(fibonacci(7)); // [0,1,1,2,3,5,8]
 ```
 
-Time complexity of fibonacci is O(n) 
+Time complexity of fibonacci is O(n)
+
+## Recursive Fibonacci Sequence
+The fibonacci sequence is a sequence in which each number is the sum of the two preceding ones.
+
+if F represents a function to calculate the fibonacci number, then
+
+Fn = Fn-1 + Fn-2
+
+F0 = 0 and F1 = 1
+
+F2 = F1 + F0
+
+F2 = 1 + 0
+
+F2 = 1
+
+```javascript
+
+```
+Big O = O(2^n)
