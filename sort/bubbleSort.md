@@ -28,3 +28,5 @@ bubbleSort(arr); // [ -6, -2, 4, 8, 20 ]
 
 console.log(arr);
 ```
+
+Big(O) = O(n^2)
