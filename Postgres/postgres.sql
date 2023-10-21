@@ -11,7 +11,8 @@ CREATE TABLE person (
 	country VARCHAR(20) NOT NULL
 );
 
-INSERT INTO person (id, first_name, last_name, email, gender, date_of_birth, country) VALUES (1, 'Joelynn', 'Wison', 'jwison0@delicious.com', 'Female', '2023-05-22', 'Russia');
+INSERT INTO person (id, first_name, last_name, email, gender, date_of_birth, country) 
+VALUES (1, 'Joelynn', 'Wison', 'jwison0@delicious.com', 'Female', '2023-05-22', 'Russia');
 
 SELECT * FROM person LIMIT 10;
 
@@ -54,7 +55,8 @@ DELETE TABLE person WHERE gender = 'Female';
 
 UPDATE person SET email = 'contactjittu@gmail.com' WHERE id = 100;
 
-UPDATE person SET first_name = 'Jitendra', last_name = 'Kumar', email = 'contactjittu@gmail.com' WHERE id = 100;
+UPDATE person SET first_name = 'Jitendra', last_name = 'Kumar', email = 'contactjittu@gmail.com' 
+WHERE id = 100;
 
 -- On Conflict do nothing
 INSERT INTO person(id, first_name, last_name, gender, email, date_of_birth, country)
@@ -101,7 +103,8 @@ SELECT make, SUM(price) FROM car GROUP BY make;
 
 -- Get 10% discount using query
 SELECT id, make, model, price, ROUND(price * .10, 2), ROUND(price - (price * .10), 2) FROM car ;
-SELECT id, make, model, price AS original_price, ROUND(price * .10, 2) AS ten_percent, ROUND(price - (price * .10), 2) AS discount_after_ten_percent FROM car;
+SELECT id, make, model, price AS original_price, ROUND(price * .10, 2) AS ten_percent,
+ROUND(price - (price * .10), 2) AS discount_after_ten_percent FROM car;
 
 -- Handle number divisiable by zero(0)
 SELECT COALESCE(10 / NULLIF(0, 0), 0);
@@ -172,7 +175,8 @@ DELETE TABLE person WHERE id = 1;
 DELETE TABLE car WHERE id = 2;
 
 -- Exporting query results to CSV
-\copy (SELECT * FROM person LEFT JOIN car ON person.car_id = car.id) TO '/tmp/result.csv' DELIMITER ',' CSV HEADER;
+\copy (SELECT * FROM person LEFT JOIN car ON person.car_id = car.id) 
+TO '/tmp/result.csv' DELIMITER ',' CSV HEADER;
 
 -- Serial & Sequences
 SELECT nextval('person_id_seq'::regclass);
@@ -209,7 +213,7 @@ CREATE TABLE person (
 
 -- Insert into person
 INSERT INTO person (person_uid, first_name, last_name, email, gender, date_of_birth, country)
-VALUES (uuid_generate_v4(), 'Joelynn', 'Wison', 'jwison0@delicious.com', 'Female', '2023-05-22', 'Russia');
+VALUES (uuid_generate_v4(), 'Joelynn', 'Wison', 'jwison0@deli.com', 'Female', '2023-05-22', 'Russia');
 INSERT INTO person (person_uid, first_name, last_name, email, gender, date_of_birth, country)
 VALUES (uuid_generate_v4(), 'John', 'Doe', 'john@delicious.com', 'Male', '2023-05-22', 'India');
 INSERT INTO person (person_uid, first_name, last_name, email, gender, date_of_birth, country)
@@ -221,7 +225,8 @@ VALUES (uuid_generate_v4(), 'Chevrolet', 'Venture', '18307.13');
 INSERT INTO car (car_uid, make, model, price)
 VALUES (uuid_generate_v4(), 'Ford', 'Thunderbird', '68825.21');
 
-UPDATE person SET car_uid = '9c9b73c9-cb85-46e6-9df7-2846054d1728' WHERE person_uid = 'b08ab587-6857-43cb-8fa1-9771631ef06f';
+UPDATE person SET car_uid = '9c9b73c9-cb85-46e6-9df7-2846054d1728'
+WHERE person_uid = 'b08ab587-6857-43cb-8fa1-9771631ef06f';
 
 -- JOINS with USING key, when primary_key and foreign key have the same name
 SELECT * FROM person
