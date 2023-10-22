@@ -1,5 +1,20 @@
 -- https://www.mockaroo.com/ - Download dummy data
 
+-- Create database
+CREATE DATABASE peopledb;
+
+-- List database
+\l
+
+-- Select database
+\c peopledb;
+
+-- Drop(Delete) database
+DROP DATABASE peopledb;
+
+-- Create table, insert records from sql file
+\i /Users/jitendra/Workspace/Jitendra/interview/Postgres/person.sql
+
 -- Create table
 CREATE TABLE person (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
@@ -11,23 +26,35 @@ CREATE TABLE person (
 	country VARCHAR(20) NOT NULL
 );
 
+-- List tables;
+\dt
+
+-- Insert row into person table
 INSERT INTO person (id, first_name, last_name, email, gender, date_of_birth, country) 
 VALUES (1, 'Joelynn', 'Wison', 'jwison0@delicious.com', 'Female', '2023-05-22', 'Russia');
 
+-- Fetch only 10 records
 SELECT * FROM person LIMIT 10;
 
+-- Fetch 10 record and skip first 10 records, Pagination
 SELECT * FROM person OFFSET 10 LIMIT 10;
 
+-- Fetch distinct(unique) country from person table in ascending order;
 SELECT DISTINCT country FROM person ORDER BY country ASC;
 
+-- Fetch distinct(unique) country from person table in descending order;
 SELECT DISTINCT country FROM person ORDER BY country DESC;
 
+-- Fetch persons who belongs to chinda and finland
 SELECT * FROM PERSON WHERE COUNTRY IN ('China', 'Finland');
 
-SELECT * FROM person WHERE EMAIL LIKE '%google.c%'
+-- Fetch record who's email addess matching with given strings
+SELECT * FROM person WHERE EMAIL LIKE '%google.c%';
 
+-- Fetch country alongs with their person total count
 SELECT country, count(*) FROM person GROUP BY country ORDER BY country;
 
+-- Fetch country who's population count more than 5
 SELECT country, count(*) FROM person GROUP BY country HAVING COUNT(*) > 5 ORDER BY country;
 
 -- Get age
@@ -49,12 +76,16 @@ ALTER TABLE person ADD CONSTRAINT unique_email_address UNIQUE(email);
 -- check constraint
 ALTER TABLE person ADD CONSTRAINT gender_constraint CHECK (gender = 'Female' OR gender = 'Male');
 
-DELETE TABLE person;
+-- Drop(Delete) table
+DROP TABLE person;
 
-DELETE TABLE person WHERE gender = 'Female';
+-- Delete record from table on condition
+DELETE FROM person WHERE gender = 'Female';
 
+-- Update email address based on condition 
 UPDATE person SET email = 'contactjittu@gmail.com' WHERE id = 100;
 
+-- Update first_name, last_name, email based on condition
 UPDATE person SET first_name = 'Jitendra', last_name = 'Kumar', email = 'contactjittu@gmail.com' 
 WHERE id = 100;
 
@@ -74,6 +105,7 @@ VALUES (1, 'Jittu', 'Kumar', 'Male', 'jittu@gmail.com', DATE '1989-12-31', 'Indi
 ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email, last_name = EXCLUDED.last_name,
 first_name = EXCLUDED.first_name;
 
+-- Create table called car
 CREATE TABLE car (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
 	make VARCHAR(100) NOT NULL,
@@ -81,24 +113,34 @@ CREATE TABLE car (
 	price NUMERIC(19, 2) NOT NULL
 );
 
+-- Insert one record in car table
 INSERT INTO car (id, make, model, price) VALUES (1, 'Chevrolet', 'Venture', '18307.13');
 
+-- Get maximum price of car
 SELECT MAX(price) FROM car;
 
+-- Get minimum price of car
 SELECT MIN(price) FROM car;
 
+-- Get average price of car
 SELECT AVG(price) FROM car;
 
+-- Round of average price of car
 SELECT ROUND(AVG(price)) FROM car;
 
+-- Get car based on max price from different make, model 
 SELECT make, model, MAX(price) FROM car GROUP BY make, model;
 
+-- Get car based on min price from different make, model
 SELECT make, model, MIN(price) FROM car GROUP BY make, model;
 
+-- Get car based on min price from different make, model
 SELECT make, model, AVG(price) FROM car GROUP BY make, model;
 
+-- Get sum of all car price
 SELECT SUM(price) FROM car;
 
+-- Get sum of price for each make
 SELECT make, SUM(price) FROM car GROUP BY make;
 
 -- Get 10% discount using query
@@ -171,8 +213,8 @@ LEFT JOIN car ON car.id = person.car_id
 WHERE car.* IS NULL;
 
 -- Deleting records with foreign keys / cascade is bad practice
-DELETE TABLE person WHERE id = 1;
-DELETE TABLE car WHERE id = 2;
+DELETE FROM person WHERE id = 1;
+DELETE FROM car WHERE id = 2;
 
 -- Exporting query results to CSV
 \copy (SELECT * FROM person LEFT JOIN car ON person.car_id = car.id) 
@@ -232,6 +274,3 @@ WHERE person_uid = 'b08ab587-6857-43cb-8fa1-9771631ef06f';
 SELECT * FROM person
 LEFT JOIN car USING(car_uid)
 WHERE car.* IS NULL;
-
-
-\i /tmp/sqlQuery.sql  -- Create database, table and import data from file
