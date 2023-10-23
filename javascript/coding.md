@@ -105,3 +105,36 @@ Output:
   { name: 'shyam', grade: 'A+', age: 40 }
 ]
 ```
+
+### Get element with their total count of occurances
+
+#### Method: 1
+```Javascript
+const arr = [5, 5, 5, 2, 2, 2, 2, 2, 9, 4];
+const counts = {};
+
+for (const num of arr) {
+  counts[num] = counts[num] ? counts[num] + 1 : 1;
+}
+
+console.log(counts);
+// Output
+{ '2': 5, '4': 1, '5': 3, '9': 1 }
+```
+
+#### Method: 2
+```Javascript
+const arr = [5, 5, 5, 2, 2, 2, 2, 2, 9, 4];
+
+const counts = arr.reduce((acc, value) => {
+  if (!acc[value]) {
+    acc[value] = 0;
+  }
+  acc[value]++;
+  return acc;
+}, {});
+
+console.log(counts);
+// Output
+{ '2': 5, '4': 1, '5': 3, '9': 1 }
+```
