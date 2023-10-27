@@ -1,7 +1,6 @@
 <details>
-<summary><b>What is libuv, how does it works
-libuv is a multi-platform C library that provides support for asynchronous I/O based on event loops. It is an integral part of the Node.js runtime and is responsible for handling I/O operations, timers, networking, and other low-level functionalities.</b>
-</summary>
+<summary><b>What is libuv, how does it works?</b></summary>
+libuv is a multi-platform C library that provides support for asynchronous I/O based on event loops. It is an integral part of the Node.js runtime and is responsible for handling I/O operations, timers, networking, and other low-level functionalities.
 
 The library enforces an asynchronous, event-driven style of programming and offers core utilities like timers, non-blocking networking support, asynchronous file system access, child processes and more.
 
