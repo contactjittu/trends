@@ -138,3 +138,31 @@ console.log(counts);
 // Output
 { '2': 5, '4': 1, '5': 3, '9': 1 }
 ```
+
+#### Create a function which will connvert string from 'today is friday' to 'friday is today'. Condition can't use inbuild function, you can use length property or for loop.
+
+```Javascript
+let str = 'today is friday';
+
+function reverseWord(str) {
+    let result = '';
+    let word = '';
+
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === ' ' || i === str.length - 1) {
+            if(i === str.length - 1) {
+                word += str[i]
+            }
+            result = word + " " + result;
+            word = "";
+        } else {
+            word += str[i]
+        }
+    }
+
+    return result;
+}
+
+console.log(reverseWord(str));
+// output: friday is today
+```

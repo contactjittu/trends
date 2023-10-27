@@ -1,9 +1,23 @@
-const arr = [5, 5, 5, 2, 2, 2, 2, 2, 9, 4];
+let str = 'today is friday';
 
-const res = arr.filter((ele, index, self) => self.indexOf(ele) !== self.lastIndexOf(ele));
+function reverseWord(str) {
+    let result = '';
+    let word = '';
 
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === ' ' || i === str.length - 1) {
+            if(i === str.length - 1) {
+                word += str[i]
+            }
+            result = word + " " + result;
+            word = "";
+        } else {
+            word += str[i]
+        }
+    }
 
+    return result;
+}
 
-
-
-console.log({res});
+console.log(reverseWord(str));
+// output: friday is today
