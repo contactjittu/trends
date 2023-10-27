@@ -86,3 +86,63 @@ For synchronous requests, we can use a proxy such as Nginx, Amazon API Gateway, 
 
 For asynchronous requests, we can use queues such as RabbitMQ, Amazon SQS, etc4.
 </details>
+<details>
+<summary><b>Events is nodejs.</b></summary>
+Node.js is a JavaScript runtime that is designed to be event-driven. In Node.js, every action on a computer is an event, such as when a connection is made or a file is opened. Objects in Node.js can fire events, and the events module in Node.js allows you to create, fire, and listen for your own events.
+
+For example, you can create an EventEmitter object and assign event handlers to your own events with it. When a specific event is fired, the assigned event handler function will be executed.
+
+Here’s an example of how to use the events module in Node.js:
+
+```JavaScript
+// Import the events module
+var events = require('events');
+
+// Create an EventEmitter object
+var eventEmitter = new events.EventEmitter();
+
+// Create an event handler function
+var myEventHandler = function() {
+  console.log('Hello World!');
+}
+
+// Assign the event handler function to an event
+eventEmitter.on('hello', myEventHandler);
+
+// Fire the 'hello' event
+eventEmitter.emit('hello');
+```
+When you run this code, it will output Hello World! to the console because the myEventHandler function was executed when the hello event was fired.
+</details>
+
+<details>
+<summary><b>Streams in nodejs</b></summary>
+In Node.js, streams are a fundamental concept used to handle data flow between input and output sources. Streams are abstract interfaces for working with data that can be read or written sequentially.
+
+There are four types of streams in Node.js: 
+* Readable
+* Writable
+* Duplex
+* Transform
+
+Readable streams are used for read operations. They allow you to read data from a source in a continuous fashion.
+Writable streams are used for write operations. They allow you to write data to a destination in a continuous fashion.
+Duplex streams can be used for both read and write operations.
+Transform streams are a type of duplex stream that can modify or transform the data as it is being read or written.
+
+Here’s an example of how to use the stream module in Node.js to create a readable stream:
+
+```JavaScript
+const fs = require('fs');
+const readableStream = fs.createReadStream('file.txt');
+
+readableStream.on('data', function(chunk) {
+  console.log(chunk);
+});
+
+readableStream.on('end', function() {
+  console.log('Finished reading the file');
+});
+```
+In this example, we create a readable stream using the fs.createReadStream() method and pass it the name of the file we want to read. We then listen for the data event, which is emitted whenever there is data available to be read from the stream. When the end event is emitted, we know that we have finished reading the file.
+</details>
