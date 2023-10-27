@@ -1,4 +1,4 @@
-<details open>
+<details>
 <summary><b>What is libuv, how does it works
 libuv is a multi-platform C library that provides support for asynchronous I/O based on event loops. It is an integral part of the Node.js runtime and is responsible for handling I/O operations, timers, networking, and other low-level functionalities.</b>
 </summary>
@@ -9,7 +9,7 @@ In terms of how it works, libuv uses an event loop to manage I/O operations. The
 
 libuv is used by several software projects including Node.js, Luvit, Julia, uvloop and others.
 </details>
-<details open>
+<details>
 <summary><b>Explain event loop.</b></summary>
 The event loop is a programming construct that is used to handle asynchronous events in a non-blocking manner. It is a constantly running process that monitors both the callback queue and the call stack.
 
@@ -17,7 +17,7 @@ When an event occurs, it is added to the callback queue. The event loop then wai
 
 The event loop is an essential part of JavaScript’s runtime model and is responsible for executing the code, collecting and processing events, and executing queued sub-tasks. It offers some nice properties when reasoning about your program, including the fact that whenever a function runs, it cannot be preempted and will run entirely before any other code runs (and can modify data the function manipulates)
 </details>
-<details open>
+<details>
 <summary><b>What is process.nextTick(), setTimeout(), setImmediate(), In which order it will execute and why?</b></summary>
 process.nextTick(), setTimeout(), and setImmediate() are all used to schedule callbacks to be executed at a later time. However, they have different execution orders and use cases.
 
@@ -35,7 +35,7 @@ Therefore, the order of execution would be:
 
 However, it’s important to note that the exact order of execution can vary depending on the number of callbacks queued up for each method and their respective priorities.
 </details>
-<details open>
+<details>
 <summary><b>Difference between spawn() and fork() methods.</b></summary>
 In node.js, spawn() and fork() are two methods used to create child processes. While both methods are used to create child processes, they have different use cases and execution orders.
 
@@ -47,7 +47,7 @@ The main difference between the two methods is that spawn() creates a new proces
 
 Therefore, if you want to create a new Node.js process that runs the same code as the parent process, but with a different environment, you should use fork(). If you want to initiate a command in a new process, you should use spawn().
 </details>
-<details open>
+<details>
 <summary><b>Difference between promise and async/await.</b></summary>
 In JavaScript, **Promises** and **async/await** are both used to handle asynchronous operations. Promises are a pattern for handling async operations, while async/await is a syntax sugar built on top of Promises to make it easier to handle async operations. 
 
@@ -64,7 +64,7 @@ Here's a summary of the differences between Promises and async/await:
 | Can be used with any function that returns a Promise | Can only be used with functions that return Promises |
 | Can be difficult to read and understand | Makes asynchronous code look more like synchronous/procedural code, which is easier to understand |
 </details>
-<details open>
+<details>
 <summary><b>What is micro-service?</b></summary>
 In the field of software application development, **microservices** are a form of service-oriented architecture that involves building a single application with lightweight protocols by interconnecting small services. 
 
@@ -76,7 +76,7 @@ Here are some benefits of using microservices with Node.js:
 - Modularity: The integration of smaller services improves the modularity of the single monolithic app.
 - Flexibility: Microservices are loosely coupled, also referred to as distributed applications. A fault in one component won’t affect the functionality of the entire software product.
 </details>
-<details open>
+<details>
 <summary><b>How micro-service communicate with each others?</b></summary>
 
 In a microservice architecture, communication between services is made possible through an inter-service communication protocol like HTTP (s), gRPC, or message brokers.
