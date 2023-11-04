@@ -12,7 +12,7 @@ libuv is used by several software projects including Node.js, Luvit, Julia, uvlo
 <summary><b>Explain event loop.</b></summary>
 The event loop is a programming construct that is used to handle asynchronous events in a non-blocking manner. It is a constantly running process that monitors both the callback queue and the call stack.
 
-When an event occurs, it is added to the callback queue. The event loop then waits until the call stack is empty and places the next function from the callback queue to the call stack. This allows for non-blocking I/O operations and efficient use of system resources 1.
+When an event occurs, it is added to the callback queue. The event loop then waits until the call stack is empty and places the next function from the callback queue to the call stack. This allows for non-blocking I/O operations and efficient use of system resources.
 
 The event loop is an essential part of JavaScript’s runtime model and is responsible for executing the code, collecting and processing events, and executing queued sub-tasks. It offers some nice properties when reasoning about your program, including the fact that whenever a function runs, it cannot be preempted and will run entirely before any other code runs (and can modify data the function manipulates)
 </details>
@@ -48,6 +48,7 @@ Therefore, if you want to create a new Node.js process that runs the same code a
 </details>
 <details>
 <summary><b>Difference between promise and async/await.</b></summary>
+
 In JavaScript, **Promises** and **async/await** are both used to handle asynchronous operations. Promises are a pattern for handling async operations, while async/await is a syntax sugar built on top of Promises to make it easier to handle async operations. 
 
 Promises are objects that represent the eventual completion (or failure) of an asynchronous operation and allow you to handle the result of that operation when it's ready. Promises have three states: `pending`, `fulfilled`, and `rejected`. You can use `.then()` method to handle a fulfilled promise and `.catch()` method to handle a rejected promise. 
@@ -65,6 +66,7 @@ Here's a summary of the differences between Promises and async/await:
 </details>
 <details>
 <summary><b>What is micro-service?</b></summary>
+
 In the field of software application development, **microservices** are a form of service-oriented architecture that involves building a single application with lightweight protocols by interconnecting small services. 
 
 **Node.js** is a popular choice for developing microservices because it uses an event-driven architecture and enables efficient, real-time application development. 
