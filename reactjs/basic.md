@@ -769,3 +769,49 @@ The key differences between Redux Thunk and Redux Saga are:
 
 In summary, the choice between Redux Thunk and Redux Saga depends on the specific requirements of your project. If your application has simple needs, Redux Thunk might be sufficient. However, if you need to handle more complex scenarios like race conditions, cancellation, and if-else based on actions, Redux Saga would be a better choice.
 </details>
+
+
+<details>
+<summary>
+<b>What is AbortController?</b>
+</summary>
+
+The `AbortController` is a JavaScript class that allows you to cancel HTTP requests. This can be quite useful in preventing updates of loaded data in your application. For instance, if a user fills out a search form and clears it before the results are displayed, you can cancel the HTTP request to avoid showing outdated search results.
+
+You can create a new `AbortController` object using the `AbortController()` constructor. Communicating with a DOM request is done using an `AbortSignal` object.
+
+Here's how you might use it in a React component:
+
+```jsx
+import React, { useEffect, useState } from 'react';
+
+function ExampleComponent() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    // axios.get('https://api.example.com/data', { signal: controller.signal }) // axios example
+    fetch('https://api.example.com/data', { signal })
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => {
+        if (error.name === 'AbortError') {
+          console.log('Fetch aborted');
+        } else {
+          console.error('Another error: ', error);
+        }
+      });
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+  return <div>{/* render your data here */}</div>;
+}
+```
+
+In this code, an `AbortController` is created and its `signal` is passed to the `fetch` function. If the component unmounts before the fetch completes, the `useEffect` cleanup function runs and calls `controller.abort()`, which aborts the fetch.
+</details>
