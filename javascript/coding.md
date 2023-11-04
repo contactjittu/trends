@@ -157,7 +157,7 @@ let obj2 = { a: 1, b: 34, c: 1, d: 6 };
 console.log(getUnique(obj1, obj2)); // Output: {c: 1, d: 6}
 ```
 
-#### Create a function which will connvert string from 'today is friday' to 'friday is today'. Condition can't use inbuild function, you can use length property or for loop.
+#### Create a function which will convert string from 'today is friday' to 'friday is today'. Condition can't use inbuild function, you can use length property or for loop.
 
 ```Javascript
 let str = "today is friday";
