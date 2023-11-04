@@ -558,6 +558,43 @@ This demonstrates the key difference between Promise.any and Promise.race. Promi
 
 <details>
 <summary>
+<b>What is the difference between `Object.freeze()` and `Object.seal()`?</b>
+</summary>
+
+`Object.freeze()` and `Object.seal()` are both used to create non-extensible objects in JavaScript, but they behave differently:
+
+- **Object.freeze()**: This method makes an object completely immutable. It prevents you from adding new properties, removing existing properties, and modifying the values of existing properties. It also prevents changes to the object's prototype. If you try to modify the object in any way, it will be ignored without any error being thrown.
+
+- **Object.seal()**: This method allows modifications to the values of existing properties, but it prevents adding or deleting properties. It makes every existing property non-configurable, meaning they cannot be converted from 'data descriptors' to 'accessor descriptors' (and vice versa), and no attribute of accessor descriptors can be modified at all. However, data descriptors can change their writable attribute, and their value attribute if writable is true. If you try to add or delete properties, it will be ignored without any error being thrown.
+
+Here's a summary:
+
+| Method | Adding Properties | Removing Properties | Modifying Existing Properties | Modifying Object's Prototype |
+| --- | --- | --- | --- | --- |
+| Object.freeze() | ❌ | ❌ | ❌ | ❌ |
+| Object.seal() | ❌ | ❌ | ✅ | ✅ |
+
+Please note that both `Object.freeze()` and `Object.seal()` are shallow, meaning property values that are objects can still be modified unless those objects are also frozen or sealed.
+
+```js
+let obj = { a: 1, b: 2 };
+
+// Using Object.freeze()
+let frozenObj = Object.freeze(Object.assign({}, obj));
+frozenObj.a = 3; // This will not change the a property
+console.log(frozenObj.a); // Outputs: 1
+
+// Using Object.seal()
+let sealedObj = Object.seal(Object.assign({}, obj));
+sealedObj.a = 3; // This will change the a property
+console.log(sealedObj.a); // Outputs: 3
+```
+In this example, frozenObj is a frozen object, which means its properties cannot be added, deleted, or changed. Any attempts to do so will be ignored without any error being thrown. sealedObj is a sealed object, which means its existing properties cannot be deleted, but they can be changed. Any attempts to delete properties will be ignored without any error being thrown.
+</details>
+
+
+<details>
+<summary>
 <b>There is an object named 'employee' that has several properties. I want to generate a new object called 'newEmployee' that contains all the properties of the 'employee' object. However, I want to ensure that the existing properties of the 'newEmployee' object cannot be modified or deleted.</b>
 </summary>
 If you want to create a new object that includes all properties of the existing object and prevents modification and deletion of these properties, but allows addition of new properties, you can use Object.seal().
@@ -580,26 +617,4 @@ newEmployee.department = 'Engineering'; // This will add a new property
 console.log(newEmployee); // Outputs: { name: 'John Doe', role: 'Software Engineer', age: 30, department: 'Engineering' }
 ```
 In this example, newEmployee is a sealed object, which means its existing properties cannot be deleted or changed, but new properties can be added. Any attempts to delete or change existing properties will be ignored without any error being thrown. However, new properties can be added to the object. Please note that Object.seal() is shallow, meaning property values that are objects can still be modified unless those objects are also sealed. If you need to deep seal an object (prevent modification of all nested objects), you’ll need to write a function that recursively seals each property that is an object.
-
-</details>
-
-<details>
-<summary>
-<b>What is the difference between `Object.freeze()` and `Object.seal()`?</b>
-</summary>
-
-`Object.freeze()` and `Object.seal()` are both used to create non-extensible objects in JavaScript, but they behave differently:
-
-- **Object.freeze()**: This method makes an object completely immutable. It prevents you from adding new properties, removing existing properties, and modifying the values of existing properties. It also prevents changes to the object's prototype. If you try to modify the object in any way, it will be ignored without any error being thrown.
-
-- **Object.seal()**: This method allows modifications to the values of existing properties, but it prevents adding or deleting properties. It makes every existing property non-configurable, meaning they cannot be converted from 'data descriptors' to 'accessor descriptors' (and vice versa), and no attribute of accessor descriptors can be modified at all. However, data descriptors can change their writable attribute, and their value attribute if writable is true. If you try to add or delete properties, it will be ignored without any error being thrown.
-
-Here's a summary:
-
-| Method | Adding Properties | Removing Properties | Modifying Existing Properties | Modifying Object's Prototype |
-| --- | --- | --- | --- | --- |
-| Object.freeze() | ❌ | ❌ | ❌ | ❌ |
-| Object.seal() | ❌ | ❌ | ✅ | ✅ |
-
-Please note that both `Object.freeze()` and `Object.seal()` are shallow, meaning property values that are objects can still be modified unless those objects are also frozen or sealed.
 </details>
