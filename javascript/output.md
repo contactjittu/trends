@@ -15,8 +15,14 @@ console.log(a); // 10
 ```
 
 ```js
+const a; // SyntaxError: Missing initializer in const declaration
+a = 1;
+console.log(a);
+```
+
+```js
 let a;
-console.log(a); // SyntaxError: Missing initializer in const declaration
+console.log(a);
 a = 10;
 console.log(a); // program terminate
 ```
