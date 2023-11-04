@@ -139,6 +139,24 @@ console.log(counts);
 { '2': 5, '4': 1, '5': 3, '9': 1 }
 ```
 
+#### Extract unique properties from two objects
+```js
+function getUnique(object1, object2) {
+  let result = {};
+  for (let key in object2) {
+    if (!object1.hasOwnProperty(key)) {
+      result[key] = object2[key];
+    }
+  }
+  return result;
+}
+
+let obj1 = { a: 1, b: 34 };
+let obj2 = { a: 1, b: 34, c: 1, d: 6 };
+
+console.log(getUnique(obj1, obj2)); // Output: {c: 1, d: 6}
+```
+
 #### Create a function which will connvert string from 'today is friday' to 'friday is today'. Condition can't use inbuild function, you can use length property or for loop.
 
 ```Javascript

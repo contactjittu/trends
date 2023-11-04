@@ -1,27 +1,32 @@
 ### Javascript output program
 
-```javascript
+```js
 var a;
 console.log(a); // undefined
 a = 10;
 console.log(a); // 10
 ```
 
-```javascript
+```js
 let a;
 console.log(a); // undefined
 a = 10;
 console.log(a); // 10
 ```
 
-```javascript
+```js
 let a;
 console.log(a); // SyntaxError: Missing initializer in const declaration
 a = 10;
 console.log(a); // program terminate
 ```
 
-```javascript
+```js
+let a = 10;
+var a = 10; // SyntaxError: Identifier 'a' has already been declared
+```
+
+```js
 console.log('start');
 
 const promise1 = new Promise((resolve, reject) => {
@@ -42,7 +47,7 @@ end
 2
 ```
 
-```javascript
+```js
 const promise1 = Promise.resolve(42);
 const promise2 = new Promise((resolve, reject) => setTimeout(reject, 100, "Error occurred"));
 const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 200, "Hello"));
