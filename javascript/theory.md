@@ -666,3 +666,61 @@ console.log(newEmployee); // Outputs: { name: 'John Doe', role: 'Software Engine
 ```
 In this example, newEmployee is a sealed object, which means its existing properties cannot be deleted or changed, but new properties can be added. Any attempts to delete or change existing properties will be ignored without any error being thrown. However, new properties can be added to the object. Please note that Object.seal() is shallow, meaning property values that are objects can still be modified unless those objects are also sealed. If you need to deep seal an object (prevent modification of all nested objects), you’ll need to write a function that recursively seals each property that is an object.
 </details>
+
+<details>
+<summary>
+<b>Map and WeakMap</b>
+</summary>
+
+`Map` and `WeakMap` are both key-value data structures in JavaScript, but they have some differences:
+
+1. **Key Types**: A `Map` accepts any data type (objects, primitive values such as strings, numbers, etc.) as keys. On the other hand, a `WeakMap` only accepts objects as keys.
+
+2. **Garbage Collection**: In a `Map`, if a key is removed, the `Map` will still hold the key's reference. This means that the key is not eligible for garbage collection and will not be removed from memory. In contrast, a `WeakMap` holds weak references to the keys. If there are no other references to the object acting as a key, the garbage collector will remove the key from memory. This prevents memory leaks.
+
+3. **Iterability**: `Map` objects are iterable, which means you can loop over them. `WeakMap` objects are not iterable.
+
+4. **Size Property**: `Map` objects have a `size` property that returns the number of key-value pairs in the map. `WeakMap` does not have a `size` property.
+
+Sure, let's start with an example of a `Map`:
+
+```js
+let map = new Map();
+
+map.set('name', 'John');
+map.set('age', 30);
+
+console.log(map.get('name')); // John
+console.log(map.get('age')); // 30
+console.log(map.size); // 2
+
+for (let [key, value] of map) {
+  console.log(`${key} = ${value}`);
+}
+// name = John
+// age = 30
+```
+
+In this example, we create a `Map` and set two key-value pairs. We then retrieve the values using the `get` method and log the size of the map. Finally, we iterate over the map and log each key-value pair.
+
+Now, let's look at an example of a `WeakMap`:
+
+```js
+let weakmap = new WeakMap();
+
+let obj1 = {};
+let obj2 = {};
+
+weakmap.set(obj1, 'John');
+weakmap.set(obj2, 30);
+
+console.log(weakmap.get(obj1)); // John
+console.log(weakmap.get(obj2)); // 30
+
+obj1 = null; // remove reference to object
+
+// There's no way to verify this, but obj1 has now been removed from the WeakMap
+```
+
+In this example, we create a `WeakMap` and set two key-value pairs using objects as keys. We then retrieve the values using the `get` method. Finally, we remove the reference to `obj1`. The `WeakMap` will automatically remove `obj1` and its associated value from memory.
+</details>
