@@ -463,6 +463,54 @@ In this second example, if you click on the "BUTTON", you'll only see an alert w
 
 <details>
 <summary>
+<b>What is Generator function?</b>
+</summary>
+In JavaScript, a generator function is a special type of function that can be paused and resumed, allowing it to generate a sequence of values on demand. 
+
+Generator functions are defined using the `function*` syntax. When called, they do not initially execute their code. Instead, they return a special type of iterator, called a Generator. When a value is consumed by calling the generator's `next` method, the Generator function executes until it encounters the `yield` keyword.
+
+Here's an example of a simple generator function:
+
+```javascript
+function* idGenerator() {
+  let id = 0;
+  while (true) {
+    yield id++;
+  }
+}
+
+const gen = idGenerator();
+
+console.log(gen.next().value); // 0
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+// ...
+```
+
+In this example, `idGenerator` is a generator function that produces a sequence of IDs. Each time its `next` method is called, it yields the next ID.
+
+Generators are a powerful feature in JavaScript, especially when dealing with asynchronous programming and producing a sequence of values. They allow you to write asynchronous code that looks synchronous. For example, you can use generators to pause asynchronous tasks, wait for a promise to resolve, and then resume the asynchronous tasks.
+
+Here's an example of how you might use a generator function with promises:
+
+```js
+function* myAsyncGenerator() {
+  const data = yield fetch('https://api.example.com/data');
+  console.log(data);
+}
+
+const gen = myAsyncGenerator();
+const promise = gen.next().value;
+
+promise.then(data => gen.next(data));
+```
+
+In this example, `myAsyncGenerator` is a generator function that fetches data from an API. It yields the promise returned by `fetch`, pauses its execution, and resumes when the promise is fulfilled.
+
+</details>
+
+<details>
+<summary>
 <b>What is currying function?</b>
 </summary>
 Currying is a technique in functional programming that transforms a function with multiple arguments into a sequence of functions, each with a single argument. This means that if you have a function that takes n arguments, currying would translate this into n functions, each taking one argument.
