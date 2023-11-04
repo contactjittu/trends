@@ -21,13 +21,6 @@ console.log(a);
 ```
 
 ```js
-let a;
-console.log(a);
-a = 10;
-console.log(a); // program terminate
-```
-
-```js
 let a = 10;
 var a = 10; // SyntaxError: Identifier 'a' has already been declared
 ```
