@@ -184,3 +184,32 @@ function reverseWord(str) {
 console.log(reverseWord(str));
 // output: friday is today
 ```
+
+#### create a function to flatten an array
+
+
+The flat() method of Array instances creates a new array with all sub-array elements concatenated into it recursively up to the specified depth. The depth level specifying how deep a nested array structure should be flattened. Defaults to 1.
+
+```js
+const arr4 = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]];
+arr4.flat(Infinity);
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+Example below without using flat
+```js
+function flattenArray(nestedArray) {
+    let flatArray = [];
+    for (let i = 0; i < nestedArray.length; i++) {
+        if (Array.isArray(nestedArray[i])) {
+            flatArray = flatArray.concat(flattenArray(nestedArray[i]));
+        } else {
+            flatArray.push(nestedArray[i]);
+        }
+    }
+    return flatArray;
+}
+
+const arr = [1,2,[3,[4,5,[6]]]];
+console.log(flattenArray(arr)); // [ 1, 2, 3, 4, 5, 6 ]
+
+```
