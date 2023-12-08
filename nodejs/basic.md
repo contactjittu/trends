@@ -488,3 +488,78 @@ eventEmitter.emit('hello');
 ```
 When you run this code, it will output Hello World! to the console because the myEventHandler function was executed when the hello event was fired.
 </details>
+
+<details>
+<summary><b>Importance of keeping the main thread unblocked in Node.js</b></summary>
+Node.js uses an event-driven architecture, which means that it handles events (such as user requests, network responses, timers, etc.) by executing callbacks (functions that are registered to handle those events). Node.js also has a worker pool, which is a collection of threads that can perform CPU-intensive tasks (such as file I/O, database queries, etc.) without blocking the main thread (the event loop).
+
+Keeping the main thread unblocked is important for several reasons:
+
+- Performance: If the main thread is blocked by a long-running operation, it cannot process other events or tasks from other clients. This reduces the throughput and scalability of your server.
+- Security: If the main thread is blocked by a malicious input or a bug in your code, it cannot respond to other clients or handle errors properly. This could lead to denial of service attacks or unexpected behavior.
+- Responsiveness: If the main thread is blocked by a slow operation, it delays the response time for your clients. This could affect user satisfaction and retention.
+
+</details>
+
+
+<details>
+<summary><b>Techniques used to prevent blocking during data-intensive operations.</b></summary>
+Techniques to prevent blocking during data-intensive operations in Node.js. Blocking is a situation where a thread or a process is unable to continue its execution until another thread or process finishes its work. Blocking can reduce the performance and scalability of your Node.js application, as well as expose it to security risks.
+
+There are several techniques that you can use to prevent blocking during data-intensive operations in Node.js, such as:
+
+- Use asynchronous and non-blocking methods: Instead of using synchronous methods (such as fs.readFileSync()) that block the main thread until they finish, use asynchronous methods (such as fs.readFile()) that return immediately and register callbacks to handle the results when they are ready. You can also use promises or async/await syntax to make your code more readable and concise.
+- Use worker threads: Instead of using a single worker pool thread for all CPU-intensive tasks, you can create multiple worker threads using libraries such as child_process or cluster. Each worker thread can run a separate process with its own memory space and context. This way, you can avoid blocking the main thread and improve performance and security.
+- Use web workers: Web workers are a feature of modern browsers that allow you to run JavaScript code in a separate thread from the main UI thread. You can use web workers to perform CPU-intensive tasks without blocking the browser or affecting user interaction. You can communicate between web workers and the main thread using messages or shared objects.
+
+Example, let's consider an e-commerce project where we have to handle a large number of product images. These images need to be processed (resized, compressed, etc.) before they can be displayed on the website. This is a CPU-intensive task and if done on the main thread, it can block the server from handling other requests, leading to poor performance.
+
+To prevent this, we can use worker threads in Node.js. Here's a simplified example:
+
+```javascript
+const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
+const path = require('path');
+
+if (isMainThread) {
+    // This is the main thread. Create a new worker.
+    const worker = new Worker(__filename, {
+        workerData: {
+            imagePath: '/path/to/image.jpg'
+        }
+    });
+
+    worker.on('message', (message) => {
+        console.log(`Image processing complete: ${message}`);
+    });
+
+    worker.on('error', (error) => {
+        console.error(`Worker error: ${error}`);
+    });
+
+    worker.on('exit', (code) => {
+        if (code !== 0) {
+            console.error(`Worker stopped with exit code ${code}`);
+        }
+    });
+} else {
+    // This is a worker thread. Process the image.
+    const sharp = require('sharp');  // Sharp is a high-performance image processing library.
+    const imagePath = workerData.imagePath;
+
+    sharp(imagePath)
+        .resize(300, 300)  // Resize the image to 300x300 pixels.
+        .toFile(path.join(path.dirname(imagePath), 'thumbnail.jpg'))  // Save the processed image as 'thumbnail.jpg'.
+        .then(() => {
+            parentPort.postMessage('Image processed successfully.');
+        })
+        .catch((error) => {
+            throw error;
+        });
+}
+```
+
+In this example, the main thread creates a new worker thread to process the image. The worker thread uses the `sharp` library to resize the image and save it as a new file. Once the image processing is complete, the worker thread sends a message back to the main thread.
+
+This way, the main thread remains free to handle other requests while the image is being processed. This improves the performance and responsiveness of the server, providing a better user experience for the customers of the e-commerce site. 
+
+</details>
