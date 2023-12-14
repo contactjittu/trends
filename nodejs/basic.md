@@ -409,7 +409,7 @@ In this example, the handler named `connectHandler` is bound with the event `con
 
 In Node.js, `spawn()`, `exec()`, and `fork()` are methods provided by the `child_process` module to create new child processes. Here's how they differ:
 
-1. **spawn()**: The `spawn()` method launches a new process with a given command. It returns a stream with `data`, `error` and `end` events¹. This method is best suited for processes that produce large amounts of data and can be used to read or write data sequentially.
+1. **spawn()**: The `spawn()` method launches a new process with a given command. It returns a stream with `data`, `error` and `end` events. This method is best suited for processes that produce large amounts of data and can be used to read or write data sequentially.
 
 2. **exec()**: The `exec()` method is similar to `spawn()`, but it runs a shell command in a new process. It buffers the command's generated output and passes the whole output value to a callback function (if one was provided) or returns a promise if no callback was provided. This method is best suited for processes that produce a limited amount of data.
 
@@ -561,5 +561,174 @@ if (isMainThread) {
 In this example, the main thread creates a new worker thread to process the image. The worker thread uses the `sharp` library to resize the image and save it as a new file. Once the image processing is complete, the worker thread sends a message back to the main thread.
 
 This way, the main thread remains free to handle other requests while the image is being processed. This improves the performance and responsiveness of the server, providing a better user experience for the customers of the e-commerce site. 
+
+</details>
+
+<details>
+<summary><b>Reactor pattern in Node.js</b></summary>
+
+The Reactor Pattern is a design pattern used in Node.js to handle non-blocking Input/Output (I/O) operations. Here's a brief overview:
+
+1. **Resources**: These are shared by multiple applications for I/O operations and are generally slower in executions.
+2. **Synchronous Event De-multiplexer/Event Notifier**: This uses the Event Loop for blocking on all resources. When a set of I/O operations completes, the Event De-multiplexer pushes the new events into the Event Queue.
+3. **Event Loop and Event Queue**: The Event Queue queues up the new events that occurred along with its event-handler pair.
+4. **Request Handler/Application**: This is the application that provides the handler to be executed for registered events on resources.
+
+In the Reactor Pattern, a handler (in Node.js, a callback function) is associated with each I/O operation. When an I/O request is generated, it is submitted to a demultiplexer, which handles concurrency in avoiding the blocking of the I/O mode and collects the requests in the form of an event.
+
+There are two ways in which I/O operations are performed:
+- **Blocking I/O**: The application makes a function call and pauses its execution at a point until the data is received. This is known as 'Synchronous'.
+- **Non-Blocking I/O**: The application makes a function call, and, without waiting for the results, it continues its execution. This is known as 'Asynchronous'. Node.js is Asynchronous in nature.
+
+The Reactor Pattern is one implementation technique of the event-driven architecture. It uses a single-threaded event loop blocking resources emitting events and dispatches them to corresponding handlers/callbacks. There is no need to block on I/O, as long as handlers/callbacks for events are registered to take care of them.
+
+The Reactor Pattern works as follows:
+
+- The application makes a request and the event demultiplexer gathers those requests and then it forms queues known as Event Queues.
+- Event demultiplexer is run by libuv which is a library that allows JavaScript code (via V8) to perform I/O, in-network, file, etc.
+- It is an asynchronous IO library that allows Node.js to perform I/O.
+- there is only one event queue and there are 7 basics queues.
+- Those queues have ascending priorities, the queue that has the highest priority is checked first by the event loop.
+- The Timers queue has the highest priority.
+- setTimeout and setInterval functions are queued here.
+- Once the events are done in this queue, or time is up, the event loop passes those functions to call stack, named as executing handler.
+- When one of the event queues is complete, instead of jumping to the next queue, the event loop firstly will check the other two queues which queue other micro tasks and process called nextTick functions.
+- Then it will jump to the upcoming queue.
+- Callback queue is an event queue and call stack is execute handler.
+
+[What is Reactor Pattern in Node.js - GeeksforGeeks.](#https://www.geeksforgeeks.org/what-is-reactor-pattern-in-node-js)
+
+</details>
+
+<details>
+<summary><b>REST and RESTfull</b></summary>
+
+**REST (Representational State Transfer)** is a style of software architecture that exploits the existing technology and protocols of the Web. It uses a set of constraints through which applications and servers communicate. REST was specifically designed for working with components like files, objects, and media components. It uses HTTP requests like GET, PUT, POST, and DELETE to manage CRUD (Create, Read, Update, and Delete) operations.
+
+On the other hand, **RESTful** is typically used to refer to web services implementing the REST architecture. While REST is a set of constraints, RESTful is an API adhering to those constraints. So, if an API is RESTful, that simply means that the API adheres to the REST architecture³.
+
+Here are some advantages of REST API:
+- REST API is a lightweight and flexible architecture that can be easily implemented on any platform or language.
+- REST API is stateless, which means that each request contains all the necessary information to complete the request. This allows for scalability and reduces the load on the server.
+- REST API is widely adopted and supported by most modern programming languages and frameworks.
+- REST API provides a simple and standardized way of accessing resources over the internet.
+
+</details>
+
+<details>
+<summary><b>Stateless vs Stateful</b></summary>
+
+**Stateless** and **Stateful** are terms used to describe whether a computer or computer program is designed to note and remember one or more preceding events in a given sequence of interactions with a user, another computer or program, a device, or other outside element.
+
+**Stateless Protocol**:
+- In a Stateless Protocol, the client sends a request to the server and the server responds back according to its current state.
+- It does not require the server to retain session information or status about each communicating partner for multiple requests.
+- Examples of Stateless Protocols include HTTP (Hypertext Transfer Protocol), UDP (User Datagram Protocol), and DNS (Domain Name System).
+- Stateless Protocols simplify the design of the server and require fewer resources because the system does not need to keep track of multiple link communications and session details.
+- Each communication in Stateless Protocol is discrete and unrelated to those that precede or follow.
+
+**Stateful Protocol**:
+- In a Stateful Protocol, if a client sends a request to the server, it expects some kind of response. If it does not get any response, it resends the request.
+- Stateful Protocols require the server to save the status and session information.
+- Examples of Stateful Protocols include FTP (File Transfer Protocol), TCP, and Telnet.
+- Stateful Protocols provide better performance to the client by keeping track of the connection information.
+- Stateful requests are always dependent on the server-side state.
+
+In summary, the main difference between Stateless and Stateful Protocols is that Stateless Protocols do not require the server to keep the client's information or session details for multiple requests, while Stateful Protocols require the server to save the status and session information.
+</details>
+
+<details>
+<summary><b>symmetric and asymmetric encryption</b></summary>
+
+In Node.js, you can use both symmetric and asymmetric encryption. Here's a brief overview of both:
+
+**Symmetric Encryption**:
+- Symmetric encryption uses the same key for both encryption and decryption.
+- This method is fast and efficient, but its main weakness is key distribution - the key must somehow be securely distributed and kept secret.
+- In Node.js, symmetric encryption can be implemented using the built-in `crypto` module.
+- The Advanced Encryption Standard (AES) is a commonly used symmetric encryption algorithm.
+
+Here's a simple example of symmetric encryption in Node.js using the built-in `crypto` module:
+
+```javascript
+const crypto = require('crypto');
+
+// The algorithm could be aes-128-cbc or aes-192-cbc or aes-256-cbc
+const algorithm = 'aes-256-cbc';
+const secretKey = 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3'; // Must be 256 bits (32 characters)
+const iv = crypto.randomBytes(16); // Initialization vector.
+
+const encrypt = (text) => {
+  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+  const encrypted = Buffer.concat([cipher.update(text, 'utf8'), cipher.final()]);
+  return {
+    iv: iv.toString('hex'),
+    content: encrypted.toString('hex')
+  };
+};
+
+const decrypt = (hash) => {
+  const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
+  const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
+  return decrpyted.toString();
+};
+
+const data = 'Hello, World!';
+console.log('Data:', data);
+
+const encrypted = encrypt(data);
+console.log('Encrypted:', encrypted);
+
+const decrypted = decrypt(encrypted);
+console.log('Decrypted:', decrypted);
+```
+
+In this example, `encrypt` is a function that takes a string and returns an object with the initialization vector and the encrypted string. `decrypt` is a function that takes the object returned by `encrypt` and returns the decrypted string.
+
+Please note that the `secretKey` must be 32 characters long for 'aes-256-cbc' encryption. The `iv` is a random initialization vector.
+
+**Asymmetric Encryption**:
+- Asymmetric encryption, also known as public key encryption, uses two different keys for encryption and decryption.
+- The public key is used for encryption and can be freely distributed, while the private key is kept secret and used for decryption.
+- This method is more secure for key distribution, but it is also slower and requires more computational resources.
+- RSA (Rivest-Shamir-Adleman) is a widely used asymmetric encryption algorithm.
+- In Node.js, asymmetric encryption can also be implemented using the built-in `crypto` module.
+
+Here's a simple example of how you can use asymmetric encryption in Node.js:
+
+```javascript
+const crypto = require('crypto');
+const path = require('path');
+const fs = require('fs');
+
+function encrypt(toEncrypt, relativeOrAbsolutePathToPublicKey) {
+  const absolutePath = path.resolve(relativeOrAbsolutePathToPublicKey);
+  const publicKey = fs.readFileSync(absolutePath, 'utf8');
+  const buffer = Buffer.from(toEncrypt, 'utf8');
+  const encrypted = crypto.publicEncrypt(publicKey, buffer);
+  return encrypted.toString('base64');
+}
+
+function decrypt(toDecrypt, relativeOrAbsolutePathtoPrivateKey) {
+  const absolutePath = path.resolve(relativeOrAbsolutePathtoPrivateKey);
+  const privateKey = fs.readFileSync(absolutePath, 'utf8');
+  const buffer = Buffer.from(toDecrypt, 'base64');
+  const decrypted = crypto.privateDecrypt(
+    {
+      key: privateKey.toString(),
+      passphrase: '',
+    },
+    buffer,
+  );
+  return decrypted.toString('utf8');
+}
+
+const enc = encrypt('hello', `<public.pem>`);
+console.log('enc', enc);
+const dec = decrypt(enc, `<private.pem>`);
+console.log('dec', dec);
+```
+
+In this example, `encrypt` is a function that takes a string and a path to a public key, and returns the encrypted string. `decrypt` is a function that takes an encrypted string and a path to a private key, and returns the decrypted string.
 
 </details>
