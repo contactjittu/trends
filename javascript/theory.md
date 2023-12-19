@@ -724,3 +724,9 @@ obj1 = null; // remove reference to object
 
 In this example, we create a `WeakMap` and set two key-value pairs using objects as keys. We then retrieve the values using the `get` method. Finally, we remove the reference to `obj1`. The `WeakMap` will automatically remove `obj1` and its associated value from memory.
 </details>
+
+<details>
+<summary>
+<b>Set and WeakSet</b>
+</summary>
+</details>

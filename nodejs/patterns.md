@@ -246,3 +246,84 @@ request.get(100).get(50).get(20).get(10).get(5).get(1);
 Please note that these are just simple examples and real-world use cases may require more complex and robust implementations. Also, it's important to choose the right pattern based on the specific needs of your project.
 
 </details>
+
+<details>
+<summary>
+<b>Anti-patterns in Node.js</b>
+</summary>
+
+Anti-patterns are practices that seem helpful initially but can lead to less-than-optimal results or even problems in the long run. Here are some anti-patterns in Node.js:
+
+1. **Callback Hell**: This is a situation where callbacks are nested within callbacks, making the code hard to read and maintain. It's recommended to use Promises or async/await to avoid this.
+
+2. **Blocking the Event Loop**: Node.js is single-threaded, which means blocking the event loop will cause the application to become unresponsive. Avoid synchronous functions and use non-blocking code.
+
+3. **Ignoring Errors**: Not handling errors properly can lead to unexpected application behavior. Always handle errors in callbacks, promises, and try/catch blocks.
+
+4. **Using the Wrong Declaration for Variables**: There are different ways to declare variables in JavaScript: `var`, `let`, and `const`. Using `var` can lead to unexpected behavior due to its function scope. It's recommended to use `let` and `const` as they are block-scoped.
+
+5. **Memory Leaks**: These occur when memory that is no longer needed is not released. They can cause the Node.js process to consume more memory over time and eventually crash.
+
+6. **Not Using Tools for Quality Assurance**: Tools like linters, type checkers, and test suites can catch errors before they make it into production.
+
+7. **Reinventing the Wheel**: Before writing a new utility function or library, check if there's an existing, well-maintained module in the npm registry that meets your needs.
+
+Remember, understanding these anti-patterns and avoiding them can lead to more efficient, maintainable, and robust Node.js applications.
+</details>
+
+<details>
+<summary>
+<b>OWASP Top 10 vulnerabilities</b>
+</summary>
+
+Brief explanation of each of the OWASP Top 10 vulnerabilities:
+
+1. **A01:2021-Broken Access Control**: This refers to a situation in which a web application does not properly enforce restrictions on what authenticated users are allowed to do.
+2. **A02:2021-Cryptographic Failures**: This failure is responsible for the exposure/leaking of data of critical and sensitive nature to ill-intended resources/people[^10^].
+3. **A03:2021-Injection**: Injection refers to a class of security vulnerabilities that occur when an attacker can manipulate or inject malicious data into an application's inputs, causing the application to execute unintended and potentially harmful commands[^20^].
+4. **A04:2021-Insecure Design**: Insecure design is the lack of security controls being integrated into the application throughout the development cycle.
+5. **A05:2021-Security Misconfiguration**: Security misconfiguration vulnerabilities occur when a web application component is susceptible to attack due to a misconfiguration or insecure configuration option.
+6. **A06:2021-Vulnerable and Outdated Components**: Vulnerable and outdated components refer to third-party libraries or frameworks used in web applications that have known vulnerabilities or are no longer supported by their developers.
+7. **A07:2021-Identification and Authentication Failures**: This term bundles in a number of existing items like cryptography failures, session fixation, default login credentials, and brute-forcing access.
+8. **A08:2021-Software and Data Integrity Failures**: Software and data integrity failures occur when an attacker can modify or delete data in an unauthorized manner.
+9. **A09:2021-Security Logging and Monitoring Failures**: Security logging and monitoring failures refer to the shortcomings in an application's ability to log security-relevant events and to effectively monitor those logs for suspicious or malicious activity.
+10. **A10:2021-Server-Side Request Forgery (SSRF)**: SSRF flaws occur whenever a web application is fetching a remote resource without validating the user-supplied URL.
+
+Each of these vulnerabilities represents a significant risk to web applications, and understanding them is crucial for maintaining secure systems.
+</details>
+
+<details>
+<summary>
+<b>Cross-Site Scripting (XSS) attack</b>
+</summary>
+
+Cross-Site Scripting (XSS) is a type of security vulnerability that occurs in web applications. It allows an attacker to inject malicious scripts into web pages viewed by other users. These scripts are executed by the victim's browser, thinking it's from a trusted source.
+
+XSS attacks can be categorized into three types:
+
+1. **Reflected XSS**: The malicious script is part of the URL requested by the victim's browser. The web server includes this script in its response to the browser.
+2. **Stored XSS**: The malicious script is permanently stored on the target server. When a victim requests a page from the server, the script is served along with the rest of the site content.
+3. **DOM-based XSS**: The vulnerability is in the client-side code rather than the server-side code. The attack payload is executed as a result of modifying the DOM in the victim's browser.
+
+The consequences of an XSS attack can range from account compromise, privilege escalation, and data theft, to delivering malware to the victim. To prevent XSS attacks, it's important to sanitize user inputs and encode or validate outputs. It's also recommended to use HTTP-only cookies and implement Content Security Policy (CSP).
+</details>
+
+<details>
+<summary>
+<b>SOLID principles in nodejs</b>
+</summary>
+
+SOLID is an acronym for five principles that help developers design more maintainable and scalable software. Here's how they can be applied in Node.js:
+
+1. **Single Responsibility Principle (SRP)**: A class or module should have one, and only one, reason to change. This means a class or module should only have one job or responsibility.
+
+2. **Open/Closed Principle (OCP)**: Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification. This means you should be able to add new functionality without changing existing code.
+
+3. **Liskov Substitution Principle (LSP)**: Subtypes must be substitutable for their base types. This means that if a program is using a base class, it should be able to use any of its subclasses without the program knowing.
+
+4. **Interface Segregation Principle (ISP)**: Clients should not be forced to depend on interfaces they do not use. This means that a class should not have to implement methods it doesn't use.
+
+5. **Dependency Inversion Principle (DIP)**: High-level modules should not depend on low-level modules. Both should depend on abstractions. This means that you should depend on abstractions, not on concrete implementations.
+
+These principles can guide you in designing your Node.js applications to be more understandable, flexible, and maintainable.
+</details>
