@@ -279,7 +279,7 @@ Remember, understanding these anti-patterns and avoiding them can lead to more e
 Brief explanation of each of the OWASP Top 10 vulnerabilities:
 
 1. **A01:2021-Broken Access Control**: This refers to a situation in which a web application does not properly enforce restrictions on what authenticated users are allowed to do.
-2. **A02:2021-Cryptographic Failures**: This failure is responsible for the exposure/leaking of data of critical and sensitive nature to ill-intended resources/people[^10^].
+2. **A02:2021-Cryptographic Failures**: This failure is responsible for the exposure/leaking of data of critical and sensitive nature to ill-intended resources/people.
 3. **A03:2021-Injection**: Injection refers to a class of security vulnerabilities that occur when an attacker can manipulate or inject malicious data into an application's inputs, causing the application to execute unintended and potentially harmful commands[^20^].
 4. **A04:2021-Insecure Design**: Insecure design is the lack of security controls being integrated into the application throughout the development cycle.
 5. **A05:2021-Security Misconfiguration**: Security misconfiguration vulnerabilities occur when a web application component is susceptible to attack due to a misconfiguration or insecure configuration option.
@@ -326,4 +326,19 @@ SOLID is an acronym for five principles that help developers design more maintai
 5. **Dependency Inversion Principle (DIP)**: High-level modules should not depend on low-level modules. Both should depend on abstractions. This means that you should depend on abstractions, not on concrete implementations.
 
 These principles can guide you in designing your Node.js applications to be more understandable, flexible, and maintainable.
+</details>
+
+<details>
+<summary>
+<b>Explain SAGA Pattern, Anti-Corruption Layer, Strangler Fig Pattern</b>
+</summary>
+
+Here's a brief explanation of each pattern:
+
+1. **SAGA Pattern**: This is a design pattern used to manage and maintain data consistency across multiple microservices. It involves a sequence of local transactions where each transaction is executed by a single service, and the state changes are broadcasted to other services involved in the Saga. If a local transaction fails, the saga executes a series of compensating transactions that undo the changes that were made by the preceding local transactions.
+
+2. **Anti-Corruption Layer (ACL)**: This pattern acts as a mediation layer that translates domain model semantics from one system to another system. It's used when different subsystems don't share the same semantics. This layer translates requests that one subsystem makes to the other subsystem. It ensures that an application's design is not limited by dependencies on outside subsystems.
+
+3. **Strangler Fig Pattern**: This pattern is used for incrementally migrating a legacy system by gradually replacing specific pieces of functionality with new applications and services. As features from the legacy system are replaced, the new system eventually replaces all of the old system's features, strangling the old system and allowing you to decommission it.
+
 </details>
