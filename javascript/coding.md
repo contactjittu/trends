@@ -214,7 +214,7 @@ console.log(flattenArray(arr)); // [ 1, 2, 3, 4, 5, 6 ]
 
 ```
 
-### Remove duplicates id of object from array
+### Remove duplicate id of object from array
 
 ```js
 let users = [
@@ -273,4 +273,40 @@ console.log(uniqArr);
   { id: 2, name: 'Jittu' },
   { id: 3, name: 'Shyam' }
 ]
+```
+
+### Calculate age from below object
+
+```js
+
+let obj = {
+  "a": 1,
+  "b": [
+    2,
+    3
+  ],
+  "age": 10,
+  "ol": {
+    "a": 5,
+    "age": 20
+  },
+  "d": {
+    "age": 30
+  }
+};
+
+function calculateAge(obj) {
+  let totalAge = 0;
+  for (let key in obj) {
+    if (typeof obj[key] === 'object') {
+      totalAge += calculateAge(obj[key]);
+    } else if (key === 'age') {
+      totalAge += obj[key];
+    }
+  }
+  return totalAge;
+}
+
+console.log(calculateAge(obj)); // Outputs: 60
+
 ```
