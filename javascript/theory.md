@@ -278,6 +278,27 @@ const { a, b } = obj;
 console.log(a, b); // Outputs: 1, 2
 ```
 
+Nested Object
+```js
+const myObject = {
+  name: 'John',
+  age: 30,
+  address: {
+    street: '123 Main St',
+    city: 'New York',
+    country: 'USA'
+  }
+};
+
+const { name, age, address: { street, city, country } } = myObject;
+
+console.log(name);    // Output: John
+console.log(age);     // Output: 30
+console.log(street);  // Output: 123 Main St
+console.log(city);    // Output: New York
+console.log(country); // Output: USA
+```
+
 In this example, `a` and `b` are new variables that are assigned the values of the `a` and `b` properties of the `obj` object.
 
 Destructuring is a powerful feature in JavaScript that makes it easier to work with arrays and objects.

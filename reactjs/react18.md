@@ -67,3 +67,26 @@ In this example, `useDeferredValue` is used to defer the update of the `query` s
 
 These hooks are part of the new concurrent features in React 18, designed to improve the responsiveness and performance of React applications.
 </details>
+
+<details>
+<summary><b>useTransition</b></summary>
+
+The `useTransition` hook is one of the new concurrent features introduced in React 18. It is designed to improve the responsiveness and performance of React applications.
+
+The purpose of the `useTransition` hook is to enable smoother transitions between different states or updates in your application. It allows you to indicate that a certain update is in progress and provide a fallback UI while the update is being processed.
+
+Here's a brief explanation of how `useTransition` works:
+
+1. When you call `useTransition`, it returns an array with two elements: a boolean value and a function. Let's say you store this array in a variable called `transition`.
+
+2. The boolean value in the `transition` array represents the current transition state. It will be `true` if a transition is in progress, and `false` otherwise.
+
+3. The function in the `transition` array, often named `startTransition`, is used to initiate a transition. When you call `startTransition`, it marks the beginning of a transition and returns a promise.
+
+4. While the transition is in progress, you can show a fallback UI to indicate that the update is being processed. This can be useful for scenarios where the update might take some time to complete, such as fetching data from an API or performing complex calculations.
+
+5. Once the transition is complete, the boolean value in the `transition` array will be updated to `false`, indicating that the transition has finished.
+
+By using the `useTransition` hook, you can create smoother user experiences by providing visual feedback during state updates or expensive operations. It helps to prevent the UI from freezing or becoming unresponsive while the update is being processed.
+
+</details>
