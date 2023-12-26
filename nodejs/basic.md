@@ -8,6 +8,19 @@ In terms of how it works, libuv uses an event loop to manage I/O operations. The
 
 libuv is used by several software projects including Node.js, Luvit, Julia, uvloop and others.
 </details>
+
+<details>
+<summary><b>Is node.js single threaded?</b></summary>
+Node.js is indeed single-threaded. It uses a single-threaded event loop model to handle multiple concurrent clients. This model is inspired by JavaScript’s event-based model with JavaScript callback mechanisms.
+
+However, while the JavaScript code in Node.js runs in a single thread, I/O operations like network calls, file system tasks, DNS lookup, etc., are handled by a thread pool, not by the main thread. This allows Node.js to efficiently manage more concurrent client requests, reducing memory and resource usage.
+
+One challenge with this single-threaded environment is that CPU intensive tasks can block the main thread. To handle such tasks, we might need to spawn a process.
+
+In summary, while Node.js is single-threaded for JavaScript execution, it uses multiple threads under the hood for asynchronous tasks.
+
+</details>
+
 <details>
 <summary><b>Explain event loop.</b></summary>
 The event loop is a programming construct that is used to handle asynchronous events in a non-blocking manner. It is a constantly running process that monitors both the callback queue and the call stack.
