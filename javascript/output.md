@@ -115,26 +115,45 @@ x = 10; // x is assigned the value 10 here, but it's too late
 So, when r() is executed, x is still undefined, and undefined + 20 + 30 results in NaN. That’s why console.log(r()) outputs NaN.
 
 
+<details>
+<summary>Explain
+
 ```js
-console.log('start');
-
+console.log("start");
 const promise1 = new Promise((resolve, reject) => {
-  console.log(1)
-  resolve(2)
-})
-
-promise1.then(res => {
-  console.log(res)
-})
-
-console.log('end');
+  console.log(1);
+  resolve('success')
+});
+promise1.then(() => {
+  console.log(3);
+});
+console.log(4);
 
 Output: 
 start
 1
-end
-2
+4
+3
 ```
+</summary>
+simple example of JavaScript Promises and the event loop.
+
+Here's a step-by-step explanation:
+
+console.log("start") is executed first, logging "start" to the console.
+
+Then, promise1 is created. This is a Promise that immediately logs 1 to the console and then resolves with the value 'success'.
+
+The .then() method is chained to promise1. This sets up a callback function to be executed when promise1 resolves. This callback function will log 3 to the console.
+
+However, Promises in JavaScript are asynchronous. This means that even though promise1 has already resolved, the .then() callback won't be executed until all synchronous code has finished running.
+
+So, console.log(4) is executed next, logging 4 to the console.
+
+Finally, now that all synchronous code has finished, the .then() callback is executed, logging 3 to the console.
+
+This demonstrates how JavaScript's event loop works. Even though promise1 resolves before console.log(4) is executed, the Promise's .then() callback isn't called until after all synchronous code has run.
+</details>
 
 ```js
 const promise1 = Promise.resolve(42);
