@@ -310,3 +310,24 @@ function calculateAge(obj) {
 console.log(calculateAge(obj)); // Outputs: 60
 
 ```
+
+```js
+function sum(a) {
+  let currentSum = a;
+  function f(b) {
+    if (b) {
+      currentSum += b;
+      return f;
+    } else {
+      return currentSum;
+    }
+  }
+  f.toString = function () {
+    return currentSum;
+  };
+  return f;
+}
+console.log(sum(10)(20)(30)(40)()); // Output: 100
+```
+
+sum is a function that takes one argument and returns another function f. The function f also takes one argument and returns itself, allowing for the chaining of function calls. When no argument is provided, it returns the current sum. The toString method is overridden to return the current sum when the function is coerced to a string, which happens when you try to log the function or concatenate it with a string.
