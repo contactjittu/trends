@@ -41,6 +41,150 @@ In this case, because notHoisted is a function expression and not a declaration,
 
 </details>
 
+
+
+<details>
+<summary><b>Prototype in JavaScript</b></summary>
+
+A **prototype** is an object associated with every function and object by default in JavaScript. It's used for inheritance and shared properties. When a function is created in JavaScript, the JavaScript engine adds a `prototype` property to the function. This `prototype` property is an object (called a prototype object) where you can attach methods and properties that you want to be inherited.
+
+Here's an example of how to use the prototype property:
+
+```javascript
+function Person(first, last, age, eyecolor) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eyecolor;
+}
+
+Person.prototype.nationality = "English";
+
+Person.prototype.name = function() {
+    return this.firstName + " " + this.lastName;
+};
+```
+
+</details>
+
+<details>
+
+<summary><b>Prototype Inheritance in JavaScript</b></summary>
+
+**Prototype Inheritance**, also known as **prototypal inheritance**, is a language feature in JavaScript that helps in code reuse. In prototypal inheritance, an object can inherit properties from another object, the prototype. When trying to access a property of an object, the property will not only be sought on the object but on the prototype of the object, the prototype of the prototype, and so on until either a property with a matching name is found or the end of the prototype chain is reached.
+
+Here's an example of prototype inheritance:
+
+```javascript
+function Animal(name) {
+    this.name = name;
+}
+
+Animal.prototype.walk = function() {
+    console.log(this.name + ' walks');
+};
+
+function Rabbit(name) {
+    this.name = name;
+}
+
+Rabbit.prototype = Object.create(Animal.prototype);
+
+Rabbit.prototype.jump = function() {
+    console.log(this.name + ' jumps');
+};
+
+let rabbit = new Rabbit('My rabbit');
+
+rabbit.walk(); // My rabbit walks
+rabbit.jump(); // My rabbit jumps
+```
+
+In this example, `Rabbit` inherits from `Animal` via `Rabbit.prototype = Object.create(Animal.prototype)`. So, objects created with `new Rabbit` have access to both `Animal.prototype` and `Rabbit.prototype` methods.
+
+Here's an example using class-based inheritance:
+```js
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  walk() {
+    console.log(this.name + ' walks');
+  }
+}
+
+class Rabbit extends Animal {
+  jump() {
+    console.log(this.name + ' jumps');
+  }
+}
+
+let rabbit = new Rabbit('My rabbit');
+
+rabbit.walk(); // My rabbit walks
+rabbit.jump(); // My rabbit jumps
+```
+in this example, `Animal` is a base class with a constructor and a method `walk`. `Rabbit` is a derived class that extends `Animal` and adds a new method `jump`. The `extends` keyword is used to create a subclass. The `Rabbit` class has access to all the methods of the `Animal` class, and it can also define its own methods. The `new` keyword is used to create an instance of `Rabbit`. The instance `rabbit` can call both the walk and jump methods.
+</details>
+
+<details>
+<summary><b>Class vs Function in JavaScript</b></summary>
+
+- **Class**: Declared using the `class` keyword.
+
+```javascript
+class Polygon {
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+  getArea() {
+    return this.width * this.height;
+  }
+}
+```
+
+- **Function**: Declared using the `function` keyword.
+
+```javascript
+function Polygon(width, height) {
+  this.width = width;
+  this.height = height;
+}
+
+Polygon.prototype.getArea = function() {
+  return this.width * this.height;
+};
+```
+
+### Hoisting
+
+- **Function**: Function declarations are hoisted to the top of their scope.
+- **Class**: Class declarations are not hoisted.
+
+### Use of `new` keyword
+
+- **Function**: Functions can be called directly or instantiated with the `new` keyword.
+- **Class**: Classes can only be instantiated using the `new` keyword.
+
+### Inheritance
+
+- **Function**: Functions use the `prototype` property for inheritance.
+- **Class**: Classes use the `extends` keyword for inheritance and `super` for calling the parent constructor.
+
+### Private Scope
+
+- **Function**: Functions have private scope for holding variables.
+- **Class**: Classes in JavaScript do not have private scope.
+
+### Methods and Properties
+
+- **Function**: Functions do specific things.
+- **Class**: Classes often have methods, which are functions that are associated with a particular class, and do things associated with the thing that the class is.
+
+</details>
+
 <details>
 <summary><b>What is closure, what are the benefits of it?</b></summary>
 Explanation 1:
